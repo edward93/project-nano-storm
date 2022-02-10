@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@babylonjs/core": "^4.2.1",
+    "@babylonjs/loaders": "^4.2.1",
     "sass": "^1.49.0"
   }
 }

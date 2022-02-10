@@ -1,4 +1,4 @@
-import { Engine } from "@babylonjs/core";
+import { Engine, Scene } from "@babylonjs/core";
 import { useEffect, useRef } from "react";
 
 import initialScene from "./scenes/Initial.scene";
@@ -11,15 +11,18 @@ const Game = () => {
     const engine = new Engine(canvasRef.current, true);
 
     // load the scene
-    const scene = initialScene(engine, canvasRef.current);
+    let scene: Scene;
+    initialScene(engine, canvasRef.current).then((result) => {
+      scene = result;
 
-    // Register a render loop to repeatedly render the scene
-    engine.runRenderLoop(function () {
-      scene.render();
+      // Register a render loop to repeatedly render the scene
+      engine.runRenderLoop(() => {
+        scene.render();
+      });
     });
 
     // Watch for browser/canvas resize events
-    window.addEventListener("resize", function () {
+    window.addEventListener("resize", () => {
       engine.resize();
     });
   }, []);
